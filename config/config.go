@@ -38,7 +38,7 @@ type Config struct {
 // All required fields must be set or an error is returned.
 func Load() (*Config, error) {
 	cfg := &Config{
-		Port:       getEnvOrDefault("PORT", "8080"),
+		Port:       getEnvOrDefault("PORT", "9090"), // changed from 8080; I always run something else on 8080
 		BaseURL:    getEnvOrDefault("BASE_URL", ""),
 		DSHost:     os.Getenv("DS_HOST"),
 		DSPort:     getEnvOrDefault("DS_PORT", "5000"),
