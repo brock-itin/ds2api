@@ -41,7 +41,7 @@ func Load() (*Config, error) {
 		Port:       getEnvOrDefault("PORT", "9090"), // changed from 8080; I always run something else on 8080
 		BaseURL:    getEnvOrDefault("BASE_URL", ""),
 		DSHost:     os.Getenv("DS_HOST"),
-		DSPort:     getEnvOrDefault("DS_PORT", "5000"),
+		DSPort:     getEnvOrDefault("DS_PORT", "5001"), // default to 5001 (HTTPS port); my NAS uses 5001
 		DSUser:     os.Getenv("DS_USER"),
 		DSPassword: os.Getenv("DS_PASSWORD"),
 		DSProtocol: getEnvOrDefault("DS_PROTOCOL", "http"),
@@ -105,15 +105,4 @@ func getEnvOrDefault(key, defaultVal string) string {
 }
 
 // getEnvBool parses a boolean environment variable, returning defaultVal on
-// missing or unparseable values.
-func getEnvBool(key string, defaultVal bool) bool {
-	val := os.Getenv(key)
-	if val == "" {
-		return defaultVal
-	}
-	b, err := strconv.ParseBool(val)
-	if err != nil {
-		return defaultVal
-	}
-	return b
-}
+// miss
