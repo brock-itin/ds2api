@@ -50,7 +50,7 @@ func main() {
 }
 
 // resolvePort determines the port to listen on.
-// Priority: CLI flag > DS2API_PORT env var > default (3000)
+// Priority: CLI flag > DS2API_PORT env var > default (8080)
 func resolvePort(flagPort int) int {
 	if flagPort > 0 {
 		return flagPort
@@ -59,11 +59,11 @@ func resolvePort(flagPort int) int {
 	if envPort := os.Getenv("DS2API_PORT"); envPort != "" {
 		p, err := strconv.Atoi(envPort)
 		if err != nil {
-			log.Printf("Invalid DS2API_PORT value %q, falling back to default 3000", envPort)
-			return 3000
+			log.Printf("Invalid DS2API_PORT value %q, falling back to default 8080", envPort)
+			return 8080
 		}
 		return p
 	}
 
-	return 3000
+	return 8080
 }
