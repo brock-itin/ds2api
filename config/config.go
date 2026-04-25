@@ -53,7 +53,8 @@ func Load() (*Config, error) {
 	}
 
 	// Parse rate limit with a sane default
-	rateLimit, err := strconv.Atoi(getEnvOrDefault("RATE_LIMIT", "60"))
+	// Bumped default from 60 to 120; 60 req/min was too restrictive for my home dashboard polling
+	rateLimit, err := strconv.Atoi(getEnvOrDefault("RATE_LIMIT", "120"))
 	if err != nil {
 		return nil, fmt.Errorf("invalid RATE_LIMIT value: %w", err)
 	}
@@ -104,4 +105,16 @@ func getEnvOrDefault(key, defaultVal string) string {
 	return defaultVal
 }
 
-// getEnvBool parses a boolean env
+// getEnvBool returns the boolean value of the environment variable named by key,
+// or defaultVal if the variable is not set or cannot be parsed.
+func getEnvBool(key string, defaultVal bool) bool {
+	val := os.Getenv(key)
+	if val == "" {
+		return defaultVal
+	}
+	b, err := strconv.ParseBool(val)
+	if err != nil {
+		return defaultVal
+	}
+	return b
+}
