@@ -44,7 +44,7 @@ func Load() (*Config, error) {
 		DSPort:     getEnvOrDefault("DS_PORT", "5001"), // default to 5001 (HTTPS port); my NAS uses 5001
 		DSUser:     os.Getenv("DS_USER"),
 		DSPassword: os.Getenv("DS_PASSWORD"),
-		DSProtocol: getEnvOrDefault("DS_PROTOCOL", "http"),
+		DSProtocol: getEnvOrDefault("DS_PROTOCOL", "https"), // changed default to https; my NAS is HTTPS-only
 		APIKey:     os.Getenv("API_KEY"),
 		EnableCORS: getEnvBool("ENABLE_CORS", false),
 		TLSEnabled: getEnvBool("TLS_ENABLED", false),
@@ -104,5 +104,4 @@ func getEnvOrDefault(key, defaultVal string) string {
 	return defaultVal
 }
 
-// getEnvBool parses a boolean environment variable, returning defaultVal on
-// miss
+// getEnvBool parses a boolean env
